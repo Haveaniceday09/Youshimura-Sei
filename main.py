@@ -10,6 +10,7 @@ CLEAR_MESSAGE_LIMIT = 50
 
 async def on_ready():
 	print('Успешно: {0.user}'.format(client))
+	await client.change_presence(activity = discord.Streaming(name = 'Minecraft', url = ''))
 
 @client.command(pass_context = True)
 async def о_себе(ctx):
@@ -28,9 +29,9 @@ async def on_message(message):
 
 @client.command(pass_context = True)
 async def clear(ctx, *args):
-    if len(args) <= 0:
-        await ctx.channel.send('Укажите количество сообщений для удаления "/clear #" ')
-        return
-    amount = int(args[0])
-    if amount > 0:
-        await ctx.channel.purge(limit=min(CLEAR_MESSAGE_LIMIT, amount))
+	if len(args) <= 0:
+		await ctx.channel.send('Укажите количество сообщений для удаления "/clear #" ')
+		return
+	amount = int(args[0])
+	if amount > 0:
+		await ctx.channel.purge(limit=min(CLEAR_MESSAGE_LIMIT, amount))
